@@ -20,8 +20,13 @@
 
 
 //ログアウト中のページ
+
+use App\Http\Controllers\UsersController;
+
 Route::get('/login', 'Auth\LoginController@login');
 Route::post('/login', 'Auth\LoginController@login');
+Route::get('/logout', 'Auth\LoginController@logout');
+// Route::get('/login', 'Auth\LoginController@hiddenPass');
 
 Route::get('/register', 'Auth\RegisterController@register');
 Route::post('/register', 'Auth\RegisterController@register');
@@ -30,14 +35,31 @@ Route::get('/added', 'Auth\RegisterController@added');
 
 
 //ログイン中のページ
-Route::get('/top','PostsController@index');
+Route::get('/top', 'PostsController@index');
 
-Route::get('/profile','UsersController@profile');
-
-Route::get('/search','UsersController@index');
-
-Route::get('/follow-list','PostsController@index');
-Route::get('/follower-list','PostsController@index');
+Route::post('/top', 'PostsController@create');
 
 
+Route::get('post/{id}/delete', 'PostsController@delete');
 
+Route::post('/update', 'PostsController@update');
+
+
+// Route::get('/profile', 'UsersController@profile');
+Route::get('/profile', 'UsersController@profileLists')->name('profile');
+Route::post('/profileUpdate', 'UsersController@profileUpdate');
+
+Route::get('/search', 'UsersController@search');
+Route::post('/search', 'UsersController@search');
+
+Route::post('/followBtn', 'UsersController@followBtn');
+Route::post('/followRemove', 'UsersController@followRemove');
+
+// Route::get('/follow-list', 'PostsController@index');
+Route::get('/follow-list', 'FollowsController@followList');
+// Route::get('/follower-list', 'PostsController@index');
+Route::get('/follower-list', 'FollowsController@followerList');
+
+
+Route::get('follow/{id}', 'UsersController@otherProfile');
+Route::get('follower/{id}', 'UsersController@otherProfile');

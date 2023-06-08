@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -38,17 +38,33 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    
-    public function login(Request $request){
-        if($request->isMethod('post')){
-            
-            $data=$request->only('mail','password');
+
+    public function login(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $data = $request->only('mail', 'password');
+
+            $pass = $request->input('password');
+            $hiddenPass = str_repeat('*', strlen($pass));
+            $request->session()->put('pass', $hiddenPass);
+            // $session = $request->session()->put($hiddenPass);
+
+            // dd($hiddenPass);
             // ログインが成功したら、トップページへ
             //↓ログイン条件は公開時には消すこと
-            if(Auth::attempt($data)){
+            if (Auth::attempt($data)) {
                 return redirect('/top');
             }
         }
         return view("auth.login");
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $this->guard()->logout();
+        $request->session()->invalidate();
+
+        return $this->loggedOut($request) ?: redirect('/login');
     }
 }

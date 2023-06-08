@@ -48,11 +48,32 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'username' => 'required|string|max:255',
-            'mail' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:4|confirmed',
-        ]);
+        return Validator::make(
+            $data,
+            [
+                'username' => ['required', 'string', 'min:4', 'max:12'],
+                'mail' => ['required', 'string', 'email', 'min:4', 'max:12', 'unique:users'],
+                'password' => [
+                    'required', 'string', 'min:4', 'max:12', 'confirmed', 'same:password'
+                ],
+            ],
+            [
+                'username.required' => 'ユーザー名は必須項目です。',
+                'username.min' => 'ユーザー名は4文字以上で入力してください。',
+                'username.max' => 'ユーザー名は12文字以内で入力してください。',
+                'mail.required' => 'メールアドレスは必須項目です。',
+                'mail.email' => 'メールアドレスが有効ではありません。',
+                'mail.min' => 'メールアドレスは4文字以上で入力してください。',
+                'mail.max' => 'メールアドレスは12文字以内で入力してください。',
+                'mail.unique' => 'このメールアドレスは既に登録されています。',
+                'password.required' => 'パスワードは必須項目です。',
+                'password.min' => 'パスワードは4文字以上で入力してください。',
+                'password.max' => 'パスワードは12文字以内で入力してください。',
+                'password.confirmed' => 'パスワードが一致していません。',
+                'password.same' => 'パスワードが一致していません。',
+
+            ]
+        );
     }
 
     /**
@@ -75,17 +96,19 @@ class RegisterController extends Controller
     //     return view("auth.register");
     // }
 
-    public function register(Request $request){
-        if($request->isMethod('post')){
+    public function register(Request $request)
+    {
+        if ($request->isMethod('post')) {
             $data = $request->input();
-
+            $this->validator($data);
             $this->create($data);
             return redirect('added');
         }
         return view('auth.register');
     }
 
-    public function added(){
+    public function added()
+    {
         return view('auth.added');
     }
 }
