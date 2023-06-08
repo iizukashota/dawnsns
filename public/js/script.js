@@ -14,8 +14,8 @@ $(function () {
       return false;
     });
   });
-  $('.modalClose').on('click', function () {
-    $('.js-modal').fadeOut();
+  $('.modalclose').on('click', function () {
+    $('.modal').fadeOut();
     return false;
   });
 });

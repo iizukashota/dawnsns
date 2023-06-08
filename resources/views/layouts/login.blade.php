@@ -36,7 +36,7 @@
                     <li><a href="/logout" onclick="return confirm('ログアウトしますか？')">ログアウト</a></li>
                 </ul>
             </div>
-            <img src=" {{ asset('storage/icons/'.$user->images) }}">
+            <img class="icon-img" src=" {{ asset('storage/icons/'.$user->images) }}">
         </div>
     </header>
     <div id="row">

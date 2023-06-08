@@ -3,7 +3,7 @@
 @section('content')
 <div class="profile-conteiner">
   <div class="profile-image">
-    <img src="{{ asset('storage/icons/'.$user->images) }}" alt="">
+    <img class="icon-img" src="{{ asset('storage/icons/'.$user->images) }}" alt="">
   </div>
   {!! Form::open(['url' => '/profileUpdate','files' => true]) !!}
   {!! Form::hidden('id',$user->id) !!}

@@ -30,9 +30,6 @@ body {}
 
 /* logout.blade.php */
 
-
-/* login.blade.php */
-
 .menu-area {
     width: 170px;
     display: flex;
@@ -76,14 +73,13 @@ body {}
     color: #fff;
 }
 
-.model {
+.modal {
     display: none;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
-
-
-
-
-
 
 /* index.blade.php */
 .post-container {
@@ -104,25 +100,38 @@ body {}
     border-radius: 30px;
 }
 
-.post-area {
-    display: flex;
-    height: 100%;
-}
-
-.post-form {
-    display: inline-block;
-}
-
-.post-button {
-    background: transparent;
-    border: none;
-}
-
 .users-posts-container {
+    position: relative;
     width: 100%;
     height: auto;
     margin: 20px;
 }
+
+.form-area {
+    height: 100%;
+}
+
+.post-form {
+    height: 100%;
+    width: 600px;
+    border: none;
+    margin-left: 10px;
+}
+
+
+.form-btn {
+    float: right;
+    display: block;
+    margin: 30px 0 0 50px;
+
+}
+
+
+
+
+
+
+/* profile.blade.php */
 
 .profile-container {
     width: 100%;
@@ -136,6 +145,7 @@ body {}
 .profile-form {
     margin: 10px;
 }
+
 
 
 /* search.blade.php */
@@ -155,4 +165,8 @@ body {}
 .search-lists {
     display: block;
     margin: 30px 0 50px 80px;
+}
+
+.icon-img {
+    width: 70px;
 }
