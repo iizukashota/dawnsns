@@ -51,20 +51,20 @@ class RegisterController extends Controller
         return Validator::make(
             $data,
             [
-                'username' => ['required', 'string', 'min:4', 'max:12'],
-                'mail' => ['required', 'string', 'email', 'min:4', 'max:12', 'unique:users'],
+                'username' => ['required', 'string', 'min:4', 'max:20'],
+                'mail' => ['required', 'string', 'email', 'min:4', 'max:20', 'unique:users'],
                 'password' => [
-                    'required', 'string', 'min:4', 'max:12', 'confirmed', 'same:password'
+                    'required', 'string', 'min:4', 'max:12', 'confirmed', 'same:password_confirmation'
                 ],
             ],
             [
                 'username.required' => 'ユーザー名は必須項目です。',
                 'username.min' => 'ユーザー名は4文字以上で入力してください。',
-                'username.max' => 'ユーザー名は12文字以内で入力してください。',
+                'username.max' => 'ユーザー名は20文字以内で入力してください。',
                 'mail.required' => 'メールアドレスは必須項目です。',
                 'mail.email' => 'メールアドレスが有効ではありません。',
                 'mail.min' => 'メールアドレスは4文字以上で入力してください。',
-                'mail.max' => 'メールアドレスは12文字以内で入力してください。',
+                'mail.max' => 'メールアドレスは20文字以内で入力してください。',
                 'mail.unique' => 'このメールアドレスは既に登録されています。',
                 'password.required' => 'パスワードは必須項目です。',
                 'password.min' => 'パスワードは4文字以上で入力してください。',
@@ -73,7 +73,7 @@ class RegisterController extends Controller
                 'password.same' => 'パスワードが一致していません。',
 
             ]
-        );
+        )->validate();
     }
 
     /**
@@ -98,10 +98,14 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
+
         if ($request->isMethod('post')) {
             $data = $request->input();
             $this->validator($data);
             $this->create($data);
+
+            session()->put('username', $data['username']);
+
             return redirect('added');
         }
         return view('auth.register');
