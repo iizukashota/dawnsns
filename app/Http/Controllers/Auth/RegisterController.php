@@ -56,6 +56,7 @@ class RegisterController extends Controller
                 'password' => [
                     'required', 'string', 'min:4', 'max:12', 'confirmed', 'same:password_confirmation'
                 ],
+
             ],
             [
                 'username.required' => 'ユーザー名は必須項目です。',

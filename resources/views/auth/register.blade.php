@@ -1,15 +1,7 @@
 @extends('layouts.logout')
 
 @section('content')
-@if ($errors->any())
-<div class="alert alert-danger">
-  <ul>
-    @foreach ($errors->all() as $error)
-    <li>{{ $error }}</li>
-    @endforeach
-  </ul>
-</div>
-@endif
+
 
 <div>
   {!! Form::open() !!}
@@ -18,18 +10,30 @@
   <div>
     <p>ユーザー名</p>
     <span> {{ Form::text('username',null,['class' => 'input']) }}</span>
+    @error('username')
+    <span class="alert alert-danger">{{ $message }}</span>
+    @enderror
   </div>
   <div>
     <p>メールアドレス</p>
     <span> {{ Form::text('mail',null,['class' => 'input']) }}</span>
+    @error('mail')
+    <span class="alert alert-danger">{{ $message }}</span>
+    @enderror
   </div>
   <div>
     <p>パスワード</p>
     <span>{{ Form::text('password',null,['class' => 'input']) }}</span>
+    @error('password')
+    <span class="alert alert-danger">{{ $message }}</span>
+    @enderror
   </div>
   <div>
     <p>パスワード確認</p>
     <span>{{ Form::text('password_confirmation',null,['class' => 'input']) }}</span>
+    @error('password_confirmation')
+    <span class="alert alert-danger">{{ $message }}</span>
+    @enderror
   </div>
   <span>
     {{ Form::submit('登録') }}
