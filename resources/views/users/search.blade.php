@@ -11,7 +11,7 @@
   @foreach ($users as $user)
   <tr>
     <th class="search-icon">
-      <img src="storage/icons/{{ $user->images }}" alt="">
+      <img class="icon-img" src="storage/icons/{{ $user->images }}" alt="">
       <p>{{ $user->username }}</p>
     </th>
     @if($followNumbers->contains($user->id))
