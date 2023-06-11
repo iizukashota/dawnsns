@@ -29,6 +29,7 @@ class PostsController extends Controller
             ->where('users.id', Auth::id())
             ->orWhere('users.id', '<>', Auth::id())
             ->select('users.images', 'users.username', 'posts.posts', 'posts.id', 'posts.user_id', 'posts.created_at as created_at')
+            ->orderBy('created_at', 'desc')
             ->get();
 
 

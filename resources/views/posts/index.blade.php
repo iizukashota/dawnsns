@@ -24,17 +24,21 @@
     <small class="posts-create-date">{{ $post->created_at }}</small>
 
     @if($user->id == $post->user_id)
-    <div class="posts-update">
-      <img class="modalopen" data-target="{{ $post->id }}" src="{{ asset('storage/icons/edit.png')}}" alt="">
+    <div class="modalEdit">
+      <a href="" class="modalOpen" data-target="{{ $post->id }}">
+        <img class="edit-img" src="{{ asset('storage/icons/edit.png')}}" alt="">
+      </a>
+    </div>
+    <div class="modal-edit js-modal" id="{{ $post->id }}">
+      <div class="modal-inner">
+        {!! Form::open(['url' => '/update']) !!}
+        {!! Form::hidden('id', $post->id) !!}
+        {{ Form::text('upPost',$post->posts,['class' => 'update-text']) }}
+        <input class="modalClose" type="image" src="{{ asset('storage/icons/edit.png')}}">
+        {!! Form::close() !!}
+      </div>
     </div>
 
-    <div class="modal" id="{{ $post->id }}">
-      {!! Form::open(['url' => '/update']) !!}
-      {!! Form::hidden('id', $post->id) !!}
-      {{ Form::text('upPost',$post->posts,['class' => 'input']) }}
-      <input class="modalclose" type="image" src="{{ asset('storage/icons/edit.png')}}">
-      {!! Form::close() !!}
-    </div>
 
     <div class="posts-delete">
       <a href="/post/{{ $post->id }}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')">

@@ -35,6 +35,7 @@ class FollowsController extends Controller
             ->whereIn('posts.user_id', $follow_ids)
             // ->orwhere('posts.user_id', Auth::id())
             ->select('users.images', 'users.username', 'posts.user_id', 'posts.posts', 'posts.created_at as created_at')
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return view('follows.followList', [
@@ -73,6 +74,7 @@ class FollowsController extends Controller
             ->whereIn('posts.user_id', $follower_ids)
             // ->orwhere('posts.user_id', Auth::id())
             ->select('users.images', 'users.username', 'posts.posts', 'posts.created_at as created_at')
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return view('follows.followerList', [

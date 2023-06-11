@@ -11,6 +11,7 @@ body {}
     justify-content: space-between;
     padding-left: 20px;
     padding-right: 20px;
+    position: relative;
 }
 
 /* main content */
@@ -21,6 +22,7 @@ body {}
 
 #container {
     flex: 0 0 80%;
+
 }
 
 #side-bar {
@@ -33,6 +35,22 @@ body {}
     height: 50px;
     border-radius: 50px;
     border: 1px solid aqua;
+}
+
+.follow-removeBtn input {
+    padding: 5px 10px;
+    background-color: #B85656;
+    color: #fff;
+    border-radius: 5px;
+    width: 130px;
+}
+
+.follow-btn input {
+    padding: 5px 10px;
+    background-color: #6D88C2;
+    color: #fff;
+    border-radius: 5px;
+    width: 130px;
 }
 
 /* login.blade.php */
@@ -100,13 +118,17 @@ body {}
     margin-left: 10px;
 }
 
-/* logout.blade.php */
+/* login.blade.php */
 
 .menu-area {
     width: 170px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.menu-area p {
+    color: #fff;
 }
 
 .accordion-button {
@@ -118,40 +140,46 @@ body {}
     margin-bottom: 5px;
 }
 
-.accordion-area {
-    position: relative;
+.accordion-button.active {
+    transform: rotate(135deg);
+    margin-top: 10px;
 }
 
+
 .accordion-menu {
-    background-color: #3C4767;
-    width: 200px;
-    height: 70px;
+    background-color: #fff;
+    width: 287px;
+    height: auto;
     display: none;
     z-index: 1;
     position: absolute;
-    top: 50px;
-    right: -90px;
-    padding-top: 10px;
+    right: 0;
+    top: 102px;
+    border: 1px solid #D7D7D7;
 }
 
 .accordion-menu li {
     display: flex;
     justify-content: center;
+    border-bottom: 1px solid #D7D7D7;
+}
 
+.accordion-menu li:hover {
+    background-color: red;
 }
 
 .accordion-menu li a {
     text-decoration: none;
+    color: #000;
+    font-size: 18px;
+    padding: 25px;
+}
+
+.accordion-menu li a:hover {
     color: #fff;
 }
 
-.modal {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+
 
 /* index.blade.php */
 .posts-create-container {
@@ -192,7 +220,6 @@ body {}
     padding: 20px 40px 40px;
     border-bottom: 1px solid #D7D7D7;
     display: flex;
-
 }
 
 .posts-frame2 {
@@ -213,7 +240,7 @@ body {}
     opacity: 0.5;
 }
 
-.posts-update {
+.modalEdit {
     position: absolute;
     bottom: 10px;
     right: 100px;
@@ -230,10 +257,249 @@ body {}
     height: 50px;
 }
 
-.modalopen {
-    width: 50px;
-    height: 50px;
+.modal-edit {
+
+    display: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.modal-inner {
+    background-color: #fff;
+    width: 50%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.update-text {
+    display: block;
+    padding-right: 400px;
+    padding-bottom: 100px;
+    margin: 30px auto 20px;
+}
+
+.modalClose {
+    display: block;
+    margin-left: auto;
+    margin-right: 100px;
+    margin-bottom: 20px;
 }
 
 
+
+
+
+
 /* profile.blade.php */
+.profile-conteiner {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+.profile-frame {
+    margin-top: 20px;
+}
+
+.profile-image {
+    margin-right: 20px;
+}
+
+.profile-form {
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
+.profile-submit {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+
+
+/* followList.blade.php */
+.follow-title {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.followLists {
+    height: auto;
+    border-bottom: 4px solid #D7D7D7;
+    padding: 30px 40px;
+}
+
+.followLists-frame {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 80%;
+    margin-left: 50px;
+}
+
+.followLists-frame a {
+    margin: 10px;
+}
+
+.follow-posts-frame {
+    position: relative;
+    height: auto;
+    padding: 20px 40px 40px;
+    border-bottom: 1px solid #D7D7D7;
+    display: flex;
+
+}
+
+.follow-posts-frame2 {
+    width: 70%;
+    margin-left: 20px;
+}
+
+.follow-username {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.follow-create-date {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 12px;
+    opacity: 0.5;
+}
+
+
+
+
+
+
+/* follower.blade.php */
+.follower-title {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.followerLists {
+    height: auto;
+    border-bottom: 4px solid #D7D7D7;
+    padding: 30px 40px;
+}
+
+.followerLists-frame {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 80%;
+    margin-left: 50px;
+}
+
+.followerLists-frame a {
+    margin: 10px;
+}
+
+.follower-posts-frame {
+    position: relative;
+    height: auto;
+    padding: 20px 40px 40px;
+    border-bottom: 1px solid #D7D7D7;
+    display: flex;
+
+}
+
+.follower-posts-frame2 {
+    width: 70%;
+    margin-left: 20px;
+}
+
+.follower-username {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.follower-create-date {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 12px;
+    opacity: 0.5;
+}
+
+/* otherProfile.blade.php */
+.othersProfile-container {
+    height: auto;
+    padding: 40px 80px;
+    border-bottom: 4px solid #D7D7D7;
+    position: relative;
+}
+
+.othersProfile-frame {
+    display: flex;
+
+}
+
+.othersProfile-frame img {
+    margin-right: 30px;
+}
+
+.othersProfile-inner {
+    display: flex;
+    height: auto;
+}
+
+.otherProfile-inner-row {
+    display: flex;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+.profile-label {
+    width: 80px;
+}
+
+.profile-value {
+    margin-left: 10px;
+}
+
+.otherProfile-btn {
+    display: block;
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+}
+
+.otherPosts-frame {
+    position: relative;
+    height: auto;
+    padding: 20px 40px 40px;
+    border-bottom: 1px solid #D7D7D7;
+    display: flex;
+}
+
+.otherPosts-inner {
+    width: 70%;
+    margin-left: 20px;
+}
+
+.otherPosts-username {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.otherPosts-create-date {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 12px;
+    opacity: 0.5;
+}

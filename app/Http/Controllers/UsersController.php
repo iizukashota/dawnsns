@@ -137,7 +137,9 @@ class UsersController extends Controller
             ->join('users', 'posts.user_id', '=', 'users.id')
             ->where('posts.user_id', $id)
             ->select('users.images', 'users.username', 'posts.posts', 'posts.created_at as created_at')
+            ->orderBy('created_at', 'desc')
             ->get();
+
         $otherfollowNumbers = DB::table('follows')
             ->where('follower', [Auth::id()])
             ->pluck('follow');
@@ -186,7 +188,8 @@ class UsersController extends Controller
             'followNumbers' => $followNumbers,
             'user' => $user,
             'follow_counts' => $follow_counts,
-            'follower_counts' => $follower_counts
+            'follower_counts' => $follower_counts,
+            'keyword' => $keyword
         ]);
     }
     //フォローテーブルへの登録機能
