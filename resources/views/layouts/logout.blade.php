@@ -9,6 +9,7 @@
     <title></title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/logout.css">
+    <link rel="stylesheet" href="css/style.css">
     <!--スマホ,タブレット対応-->
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!--サイトのアイコン指定-->
@@ -22,9 +23,11 @@
 </head>
 
 <body>
-    <header>
-        <h1><img src="{{ asset('storage/icons/main_logo.png') }}"></h1>
-        <p>Social Network Service</p>
+    <header class="logout-header">
+        <div class="logout-frame">
+            <h1><img src="{{ asset('storage/icons/main_logo.png') }}"></h1>
+            <p>Social Network Service</p>
+        </div>
     </header>
     <div id="container">
         @yield('content')

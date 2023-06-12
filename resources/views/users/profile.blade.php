@@ -8,47 +8,47 @@
   <div class="profile-frame">
     {!! Form::open(['url' => '/profileUpdate','files' => true]) !!}
     {!! Form::hidden('id',$user->id) !!}
-    <table>
-      <tr>
-        <td>{{ Form::label('UserName') }}</td>
-        <td>{{ Form::text('username', $user->username, ['class' => 'profile-form']) }}</td>
+    <div class="profile-inner">
+      <div class="profile-inner-row">
+        <div class="profile-label">{{ Form::label('UserName') }}</div>
+        <div class="profile-value">{{ Form::text('username', $user->username, ['class' => 'profile-form','size'=>'30']) }}</div>
         @if($errors->has('username'))
-        <td>{{ $errors->first('username') }}</td>
+        <div>{{ $errors->first('username') }}</div>
         @endif
-      </tr>
-      <tr>
-        <td>{{Form::label('MailAdress')}}</td>
-        <td>{{ Form::text('mail',$user->mail,['class' => 'profile-form']) }}
-        </td>
+      </div>
+      <div class="profile-inner-row">
+        <div class="profile-label">{{Form::label('MailAdress')}}</div>
+        <div class="profile-value">{{ Form::text('mail',$user->mail,['class' => 'profile-form','size'=>'30']) }}
+        </div>
         @if($errors->has('mail'))
-        <td>{{ $errors->first('mail')}}</td>
+        <div>{{ $errors->first('mail')}}</div>
         @endif
-      </tr>
-      <tr>
-        <td>{{Form::label('PassWord')}}</td>
-        <td> {{ Form::text('password',$session,['class' => 'profile-form']) }}</td>
-      </tr>
-      <tr>
-        <td>{{Form::label('new PassWord')}}</td>
-        <td> {{ Form::text('new_password',null,['class' => 'profile-form']) }}</td>
+      </div>
+      <div class="profile-inner-row">
+        <div class="profile-label">{{Form::label('PassWord')}}</div>
+        <div class="profile-value">{{ Form::text('password',$session,['class' => 'profile-form','size'=>'30']) }}</div>
+      </div>
+      <div class="profile-inner-row">
+        <div class="profile-label">{{Form::label('new PassWord')}}</div>
+        <div class="profile-value">{{ Form::text('new_password',null,['class' => 'profile-form','size'=>'30']) }}</div>
         @if($errors->has('new_password'))
-        <td>{{ $errors->first('new_password')}}</td>
+        <div>{{ $errors->first('new_password')}}</div>
         @endif
-      </tr>
-      <tr>
-        <td>{{Form::label('Bio')}}</td>
-        <td> {{ Form::text('bio',$user->bio,['class' => 'profile-form']) }}</td>
+      </div>
+      <div class="profile-inner-row">
+        <div class="profile-label">{{Form::label('Bio')}}</div>
+        <div class="profile-value">{{ Form::text('bio',$user->bio,['class' => 'profile-form','id'=>'profile-bio','size'=>'30']) }}</div>
         @if($errors->has('bio'))
-        <td>{{ $errors->first('bio')}}</td>
+        <div>{{ $errors->first('bio')}}</div>
         @endif
-      </tr>
-      <tr>
-        <td>{{Form::label('Icon Image')}}</td>
-        <td>{!! Form::file('image',['class' => 'profile-form','id'=>'profile-image']) !!}</td>
-      </tr>
-    </table>
+      </div>
+      <div class="profile-inner-row">
+        <div class="profile-label">{{Form::label('Icon Image')}}</div>
+        <div class="profile-value">{!! Form::file('image',['class' => 'profile-form','id'=>'profile-image']) !!}</div>
+      </div>
+    </div>
     <div class="profile-submit">
-      {{ Form::submit('更新') }}
+      {{ Form::submit('更新',['class'=>'profile-submitBtn']) }}
     </div>
     {!! Form::close() !!}
   </div>

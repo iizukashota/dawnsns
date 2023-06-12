@@ -3,7 +3,7 @@
 @section('content')
 
 
-<div>
+<div class="register-container">
   {!! Form::open() !!}
   <h2>新規ユーザー登録</h2>
 

@@ -23,6 +23,7 @@ class UsersController extends Controller
         $follow_counts = DB::table('follows')
             ->where('follower', Auth::id())
             ->count();
+
         $follower_counts = DB::table('follows')
             ->where('follow', Auth::id())
             ->count();
@@ -42,7 +43,7 @@ class UsersController extends Controller
         $auth_mail = Auth::user()->mail;
         $request->validate(
             [
-                'username' => ['required', 'string', 'min:4', 'max:20'],
+                'username' => ['required', 'string', 'min:4', 'max:12'],
                 'mail' => ['required', 'email', 'min:4', 'max:20', Rule::unique('users', 'mail')->ignore($auth_mail, 'mail')],
                 'new_password' => ['nullable', 'min:4', 'max:12'],
                 'bio' => ['nullable', 'string', 'max:200'],
@@ -51,7 +52,7 @@ class UsersController extends Controller
             [
                 'username.required' => 'ユーザー名は必須項目です。',
                 'username.min' => 'ユーザー名は4文字以上で入力してください。',
-                'username.max' => 'ユーザー名は20文字以内で入力してください。',
+                'username.max' => 'ユーザー名は12文字以内で入力してください。',
                 'mail.required' => 'メールアドレスは必須項目です。',
                 'mail.email' => 'メールアドレスが有効ではありません。',
                 'mail.min' => 'メールアドレスは4文字以上で入力してください。',
@@ -64,19 +65,21 @@ class UsersController extends Controller
             ]
         );
 
-
         $user = Auth::user();
         $username = $request->input('username');
         $mail = $request->input('mail');
         $bio = $request->input('bio');
-        $pass = $request->input('new_password');
+        $newpass = $request->input('new_password');
 
-        if (request('new_password')) {
+        if (!empty($newpass)) {
             $new_password = bcrypt($request->new_password);
-        } else {
-            $new_password = DB::table('users')
+            DB::table('users')
                 ->where('id', Auth::id())
-                ->value('password');
+                ->update([
+                    'password' => $new_password,
+                ]);
+            $hiddenPass = str_repeat('*', strlen($newpass));
+            $request->session()->put('pass', $hiddenPass);
         }
 
         if ($request->hasFile('image')) {
@@ -94,13 +97,9 @@ class UsersController extends Controller
             ->update([
                 'username' => $username,
                 'mail' => $mail,
-                'password' => $new_password,
                 'bio' => $bio,
                 'images' => $fileName,
             ]);
-
-        $hiddenPass = str_repeat('*', strlen($pass));
-        $request->session()->put('pass', $hiddenPass);
         return back();
 
         // return view('users.profile', ['user' => $user, 'fileName' => $fileName]);

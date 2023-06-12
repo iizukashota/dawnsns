@@ -1,20 +1,25 @@
 @extends('layouts.logout')
 
 @section('content')
-
-{!! Form::open() !!}
-
-<p>DAWNSNSへようこそ</p>
-
-{{ Form::label('e-mail') }}
-{{ Form::text('mail',null,['class' => 'input']) }}
-{{ Form::label('password') }}
-{{ Form::password('password',['class' => 'input']) }}
-
-{{ Form::submit('ログイン') }}
-
-<p><a href="/register">新規ユーザーの方はこちら</a></p>
-
-{!! Form::close() !!}
-
+<div class="login-container">
+  {!! Form::open() !!}
+  <div class="login-frame">
+    <p>DAWNSNSへようこそ</p>
+    <div class="login-inner">
+      <div class="login-label">{{ Form::label('e-mail') }}</div>
+      <div class="login-value">{{ Form::text('mail',null,['class' => 'login-form','size'=>'30']) }}</div>
+    </div>
+    <div class="login-inner">
+      <div class="login-label">{{ Form::label('password') }}</div>
+      <div class="login-value">{{ Form::password('password',['class' => 'login-form','size'=>'30']) }}</div>
+    </div>
+    <div class="login-btn">
+      {{ Form::submit('ログイン') }}
+    </div>
+    <div class="login-register">
+      <a href="/register">新規ユーザーの方はこちら</a>
+    </div>
+  </div>
+  {!! Form::close() !!}
+</div>
 @endsection

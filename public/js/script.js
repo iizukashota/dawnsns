@@ -16,8 +16,15 @@ $(function () {
       return false;
     });
   });
-  $('.modalClose').on('click', function () {
-    $('.js-modal').fadeOut();
-    return false;
+  // $('.modalClose').on('click', function () {
+  //   $('.js-modal').fadeOut();
+  //   return false;
+  // });
+
+  $(document).on('click', function (e) {
+    if (!$(e.target).closest('.modal-inner').length) {
+      $('.js-modal').fadeOut();
+    }
   });
+
 });

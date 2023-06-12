@@ -6,12 +6,12 @@
     <img class="icon-img" src="{{ asset('storage/icons/'. $otherProfile->images)}}">
     <div class="otherProfile-inner">
       <div class="otherProfile-inner-row">
-        <div class="profile-label">Name</div>
-        <div class="profile-value">{{ $otherProfile->username }}</div>
+        <div class="otherProfile-label">Name</div>
+        <div class="otherProfile-value">{{ $otherProfile->username }}</div>
       </div>
       <div class="otherProfile-inner-row">
-        <div class="profile-label">Bio</div>
-        <div class="profile-value">{{ $otherProfile->bio}}</div>
+        <div class="otherProfile-label">Bio</div>
+        <div class="otherProfile-value">{{ $otherProfile->bio}}</div>
       </div>
     </div>
   </div>

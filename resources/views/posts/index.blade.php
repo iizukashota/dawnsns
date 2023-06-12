@@ -34,6 +34,7 @@
         {!! Form::open(['url' => '/update']) !!}
         {!! Form::hidden('id', $post->id) !!}
         {{ Form::text('upPost',$post->posts,['class' => 'update-text']) }}
+        <!-- <input type="submit" value="更新"> -->
         <input class="modalClose" type="image" src="{{ asset('storage/icons/edit.png')}}">
         {!! Form::close() !!}
       </div>
